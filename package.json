@@ -1,0 +1,16 @@
+{
+  "name": "@hivekit/integration-sdk-node",
+  "version": "0.1.0",
+  "description": "Plain JavaScript SDK for reporting Hivekit integration jobs, executions, steps and logs",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "files": ["index.js", "index.mjs", "lib", "README.md", "LICENSE"],
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node --test" },
+  "license": "MIT"
+}
