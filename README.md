@@ -1,7 +1,15 @@
 # Hivekit Integration SDK for Node.js
 
-Plain JavaScript, native `fetch`, and no external dependencies. Requires Node.js
-22 or newer. Supports both ES modules and CommonJS:
+Report job executions, progress and logs to Hivekit's Integration Registry.
+The SDK requires Node.js 22 or newer and has no external dependencies.
+
+## Install
+
+```sh
+npm install @hivekit/integration-sdk-node
+```
+
+Use the SDK from an ES module or CommonJS:
 
 ```js
 import { IntegrationClient } from '@hivekit/integration-sdk-node';
@@ -63,7 +71,6 @@ const job = await client.registerJob('fleet-import', {
 
 const existing = await client.getJob('fleet-import');
 const jobs = await client.listJobs({ limit: 100, afterKey: 'fleet-import' });
-await client.deregisterJob('fleet-import');
 ```
 
 `registerJob(key, manifest)` creates or updates a manifest and supplies its `key`.
@@ -77,9 +84,17 @@ Jobs expose `id`, `key`, `manifest`, `manifestRevision`, `configRevision`, and
 404 when absent. `listJobs` returns a page of job handles; filters are `key`,
 `afterKey`, and `limit` (1–1000, default 100).
 
-Deregistration permanently deletes the job, its configuration, and all associated
-executions, steps and logs. The server retains audit entries. This requires the
-new `DELETE service/integration/job/{jobId}` endpoint.
+### Deregister a job
+
+On a server that exposes `DELETE service/integration/job/{jobId}`, a token with
+`RD` permission for the job can look it up and deregister it:
+
+```js
+await client.deregisterJob('fleet-import');
+```
+
+Deregistration permanently deletes the job, its configuration, and its
+executions, steps and logs. The server retains audit entries.
 
 ## Executions and steps
 

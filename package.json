@@ -2,6 +2,11 @@
   "name": "@hivekit/integration-sdk-node",
   "version": "0.1.0",
   "description": "Plain JavaScript SDK for reporting Hivekit integration jobs, executions, steps and logs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hivekit/integration-sdk-node.git"
+  },
+  "keywords": ["hivekit", "integration", "sdk", "job-monitoring"],
   "main": "index.js",
   "exports": {
     ".": {
@@ -12,5 +17,9 @@
   "files": ["index.js", "index.mjs", "lib", "README.md", "LICENSE"],
   "engines": { "node": ">=22" },
   "scripts": { "test": "node --test" },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT"
 }
